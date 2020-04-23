@@ -1,7 +1,7 @@
 {
-  "name": "curli-di",
+  "name": "curli-http",
   "version": "1.0.1",
-  "description": "Lightweight dependency injection container for JavaScript/TypeScript without using decorators",
+  "description": "A Http layer on Express without decorators",
   "main": "index",
   "scripts": {
     "build:clean": "npm run clean && npm run build",
@@ -10,22 +10,30 @@
     "test": "mocha -r ts-node/register src/__tests__/unit/*.test.ts",
     "test:coverage": "nyc -r lcov -e .ts -x \"src/__tests__/unit/*.test.ts\" npm run test",
     "lint": "eslint --ext \".js,.jsx,.ts,.tsx\" \"./src\"",
-    "lint:fix": "eslint --fix --ext \".js,.jsx,.ts,.tsx\" \"./src\""
+    "lint:fix": "eslint --fix --ext \".js,.jsx,.ts,.tsx\" \"./src\"",
+    "npm:alone": "npm install && npm run clean && npm run build && npm run lint:fix && npm run test:coverage",
+    "npm": "npm run npm:alone && npm publish",
+    "npm:beta": "npm run npm:alone && npm publish --tag beta"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CarlosCraviotto/curli-di.git"
+    "url": "git+https://github.com/CarlosCraviotto/curli-http.git"
   },
   "keywords": [
-    "dependency injection",
-    "dependency",
-    "injection",
-    "container",
+    "http",
+    "express",
+    "router",
+    "controller",
+    "controllers",
+    "rest",
+    "api",
+    "get",
+    "curli",
+    "curli framework",
+    "curlijs",
     "javascript",
     "typescript",
-    "simple di",
-    "di",
-    "ioc"
+    "post"
   ],
   "engines": {
     "node": ">= 6.0.0"
@@ -44,10 +52,12 @@
   "author": "Carlos Juan Craviotto",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/CarlosCraviotto/curli-di/issues"
+    "url": "https://github.com/CarlosCraviotto/curli-http/issues"
   },
-  "homepage": "https://github.com/CarlosCraviotto/curli-di#readme",
-  "dependencies": {},
+  "homepage": "https://github.com/CarlosCraviotto/curli-http#readme",
+  "dependencies": {
+    "curli-types": "^0.0.1-beta.2"
+  },
   "devDependencies": {
     "@types/mocha": "7.0.2",
     "@types/node": "^13.11.0",
