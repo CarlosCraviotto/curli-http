@@ -34,10 +34,6 @@ export class RouterService {
         const route = controller.getRoute();
         const routeRoles: Array<string>|undefined = controller.getRoles();
 
-        console.log('httpMethod');
-        console.log(httpMethod);
-        console.log(this.expressApp);
-
         if (!routeRoles || !routeRoles.length) {
             this.expressApp[httpMethod](route, this.callController(controller));
         } else {
@@ -101,7 +97,7 @@ export class RouterService {
             controller.getRouteName() === NOT_IMPLEMENTED ||
             controller.getHttpMethod() === NOT_IMPLEMENTED
         ) {
-            console.log(controller);
+            //console.log(controller);
             throw new Error('This controller doesn\'t implement all the properties.');
         }
     }
