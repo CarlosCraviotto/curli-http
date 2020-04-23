@@ -1,13 +1,13 @@
 import * as Ajv from 'ajv';
-import {ValidationRequestException} from "./ValidationRequestException";
+import {ValidationRequestException} from './ValidationRequestException';
 
 export class ValidateDataFromExpressRequest {
 
-    public constructor(private toValidate: {}, private schema: object) {
+    public constructor (private toValidate: {}, private schema: object) {
         this.validate();
     }
 
-    private validate(): void | never {
+    private validate (): void | never {
         const ajv = new Ajv({allErrors: true}); // options can be passed, e.g. {allErrors: true}
         const validate = ajv.compile(this.schema);
         const valid = validate(this.toValidate);
@@ -24,4 +24,5 @@ export class ValidateDataFromExpressRequest {
     //     });
     //     return messageToReturn;
     // }
+
 }

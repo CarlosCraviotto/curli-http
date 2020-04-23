@@ -1,3 +1,3 @@
 export type DataExtractedFromExpressRequestType = {
-    [key: string]: any
+    [key: string]: any;
 }

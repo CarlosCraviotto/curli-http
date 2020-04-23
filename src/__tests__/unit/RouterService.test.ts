@@ -5,7 +5,7 @@ import {expressAppMother} from './ExpressAppMother';
 import {containerMother} from './ContainerMother';
 import {RouterService} from '../../RouterService';
 
-//let routerService: RouterService;
+// let routerService: RouterService;
 
 describe('Collections classes tests', function () {
 

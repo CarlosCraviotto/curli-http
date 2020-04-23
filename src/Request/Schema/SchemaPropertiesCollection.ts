@@ -1,13 +1,14 @@
-import {SchemaPropertyModel} from "./SchemaPropertyModel";
-import {SchemaPropertyType} from "./SchemaPropertyType";
-import {DataExtractedFromExpressRequestType} from "../ExtractData/DataExtractedFromExpressRequestType";
-import {ExpressRequestType} from "../ExpressRequestType";
-import {SchemeToValidateRequestType} from "../SchemeToValidateRequestType";
+import {SchemaPropertyModel} from './SchemaPropertyModel';
+import {SchemaPropertyType} from './SchemaPropertyType';
+import {DataExtractedFromExpressRequestType} from '../ExtractData/DataExtractedFromExpressRequestType';
+import {ExpressRequestType} from '../ExpressRequestType';
+import {SchemeToValidateRequestType} from '../SchemeToValidateRequestType';
 
 export class SchemaPropertiesCollection {
+
     private collection: Array<SchemaPropertyModel>;
 
-    constructor() {
+    constructor () {
         this.collection = [];
     }
 
@@ -16,7 +17,7 @@ export class SchemaPropertiesCollection {
 
             const name: string = propertyData.name;
             const findIn: string = propertyData.findIn;
-            //private position: number,
+            // private position: number,
             const schema: object | undefined = (propertyData.hasOwnProperty('schema')) ?
                 propertyData.schema : void (0);
 
@@ -30,7 +31,7 @@ export class SchemaPropertiesCollection {
         });
     }
 
-    extractDataFromExpressRequest(expressRequest: ExpressRequestType): DataExtractedFromExpressRequestType{
+    extractDataFromExpressRequest (expressRequest: ExpressRequestType): DataExtractedFromExpressRequestType {
         let data: DataExtractedFromExpressRequestType = {};
 
         this.collection.forEach((schemaPropertyModel: SchemaPropertyModel) => {
@@ -40,14 +41,14 @@ export class SchemaPropertiesCollection {
         return data;
     }
 
-    getSchemaToValidateParameters() {
+    getSchemaToValidateParameters () {
         let data: SchemeToValidateRequestType = {};
 
         if (this.collection.length > 0) {
             data = {
-                "type": "object",
-                "required": [],
-                "properties": {}
+                'type': 'object',
+                'required': [],
+                'properties': {},
             };
 
             this.collection.forEach((schemaPropertyModel: SchemaPropertyModel) => {
@@ -57,4 +58,5 @@ export class SchemaPropertiesCollection {
 
         return data;
     }
+
 }

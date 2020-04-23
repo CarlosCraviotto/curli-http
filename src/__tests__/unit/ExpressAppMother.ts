@@ -1,15 +1,14 @@
 
 const expressApp = {
-    get(){},
-    post(){},
-    delete(){},
-    put(){},
-    patch(){}
+    get () {},
+    post () {},
+    delete () {},
+    put () {},
+    patch () {},
 };
 
-
-export const expressAppMother  = {
-    get(): {[key: string]: any}{
+export const expressAppMother = {
+    get (): {[key: string]: any} {
         return expressApp;
-    }
-}
+    },
+};

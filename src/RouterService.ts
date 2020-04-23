@@ -1,17 +1,17 @@
-import {BaseController} from "./BaseController";
-import {Request} from "./Request/Request";
-import {HTTP_CODES, NOT_IMPLEMENTED} from "./ControllerConsts";
-import {RequestBuilder} from "./Request/RequestBuilder";
-import {HttpException} from "./Exception/HttpException";
+import {BaseController} from './BaseController';
+import {Request} from './Request/Request';
+import {HTTP_CODES, NOT_IMPLEMENTED} from './ControllerConsts';
+import {RequestBuilder} from './Request/RequestBuilder';
+import {HttpException} from './Exception/HttpException';
 
-import {DependencyInjection} from "curli-types";
+import {DependencyInjection} from 'curli-types';
 
 export class RouterService {
 
     private controllersCollection: Array<BaseController>;
     private requestBuilder: RequestBuilder;
 
-    public constructor(private expressApp: {[key: string]: any}, private container: DependencyInjection) {
+    public constructor (private expressApp: {[key: string]: any}, private container: DependencyInjection) {
         this.controllersCollection = [];
         this.requestBuilder = new RequestBuilder();
     }
@@ -26,14 +26,14 @@ export class RouterService {
     //     this._addController(ControllerClass);
     // }
 
-    public addControllerClass(ControllerClass: new (c: DependencyInjection) => any) {
+    public addControllerClass (ControllerClass: new (c: DependencyInjection) => any) {
         const controller = new ControllerClass(this.container);
         this.validateControllerObject(controller);
         this.controllersCollection.push(controller);
         this.bindController(controller);
     }
 
-    private bindController(controller: BaseController) {
+    private bindController (controller: BaseController) {
         const httpMethod = controller.getHttpMethodLowerCase();
         const route = controller.getRoute();
         const routeRoles: Array<string>|undefined = controller.getRoles();
@@ -53,7 +53,7 @@ export class RouterService {
      * Build the object internal request and send it to the controller method.
      * @param controller
      */
-    private callController(controller: BaseController): CallableFunction {
+    private callController (controller: BaseController): CallableFunction {
         return async (req: any, res: any) => {
             try {
                 const request: Request = this.requestBuilder.build(req, res, controller);
@@ -65,14 +65,13 @@ export class RouterService {
         };
     }
 
-
-    private checkUserLogged() {
+    private checkUserLogged () {
         return async (req: any, res: any, next: () => void) => {
             try {
                 if (req.user) {
                     next();
                 } else {
-                    res.status(HTTP_CODES.UNAUTHORIZED).set({}).send("Unauthorized to view this!");
+                    res.status(HTTP_CODES.UNAUTHORIZED).set({}).send('Unauthorized to view this!');
                 }
             } catch (e) {
                 this.sendError(e, res);
@@ -80,7 +79,7 @@ export class RouterService {
         };
     }
 
-    private sendError(e: Error, res: any): void {
+    private sendError (e: Error, res: any): void {
         if (e instanceof HttpException) {
             res.status(e.getHttpCode())
                 .set()
@@ -90,12 +89,12 @@ export class RouterService {
         }
     }
 
-    private sendInternalError(e: Error, res: any): void {
+    private sendInternalError (e: Error, res: any): void {
         console.log(e);
         res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).set({}).send(e);
     }
 
-    private validateControllerObject(controller: any): void | never {
+    private validateControllerObject (controller: any): void | never {
 
         if (!(controller instanceof BaseController)) {
             throw new Error('This is not a controller that extends from the Controller class.');

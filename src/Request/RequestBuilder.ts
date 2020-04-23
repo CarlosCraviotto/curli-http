@@ -1,19 +1,18 @@
-import {Request} from "./Request";
-import {BaseController} from "../BaseController";
-import {RequestSchema} from "./Schema/RequestSchema";
-import {SchemaRequestType} from "./Schema/SchemaRequestType";
-import {ExpressRequestType} from "./ExpressRequestType";
-import {ValidateDataFromExpressRequest} from "./Validation/ValidateDataFromExpressRequest";
-import {BadRequestHttpException} from "../Exception/BadRequestHttpException";
-import {ValidationRequestException} from "./Validation/ValidationRequestException";
-import {DTOType} from "../Type/DTOType";
+import {Request} from './Request';
+import {BaseController} from '../BaseController';
+import {RequestSchema} from './Schema/RequestSchema';
+import {SchemaRequestType} from './Schema/SchemaRequestType';
+import {ExpressRequestType} from './ExpressRequestType';
+import {ValidateDataFromExpressRequest} from './Validation/ValidateDataFromExpressRequest';
+import {BadRequestHttpException} from '../Exception/BadRequestHttpException';
+import {ValidationRequestException} from './Validation/ValidationRequestException';
+import {DTOType} from '../Type/DTOType';
 
-
-//import {ExtractDataFromExpressRequest} from "./ExtractDataFromExpressRequest";
+// import {ExtractDataFromExpressRequest} from "./ExtractDataFromExpressRequest";
 
 export class RequestBuilder {
 
-    public build(req: any, res: any, controller: BaseController): Request {
+    public build (req: any, res: any, controller: BaseController): Request {
         const headers: object = this.getHeadersFromRequest(req);
         const commandDTO = this.processRequestAndGenerateCommandDTO(req, controller);
         const request = new Request(req, res, headers, commandDTO, req.user);
@@ -21,7 +20,7 @@ export class RequestBuilder {
         return request;
     }
 
-    private getHeadersFromRequest(req: any): object {
+    private getHeadersFromRequest (req: any): object {
         let headers: object = {};
         if (req.hasOwnProperty('headers')) {
             headers = req.headers;
@@ -29,7 +28,7 @@ export class RequestBuilder {
         return headers;
     }
 
-    private processRequestAndGenerateCommandDTO(
+    private processRequestAndGenerateCommandDTO (
         req: ExpressRequestType,
         controller: BaseController
     ): object | undefined {
@@ -56,7 +55,7 @@ export class RequestBuilder {
      * @param dataFromRequest
      * @param controller
      */
-    private createCommandFromDataRequest(
+    private createCommandFromDataRequest (
         dataFromRequest: DTOType,
         controller: BaseController
     ): DTOType {
@@ -75,7 +74,7 @@ export class RequestBuilder {
      * Confirm this is a SchemaRequestType object
      * @param requestSchemaConfig
      */
-    private isRequestSchema(
+    private isRequestSchema (
         requestSchemaConfig: SchemaRequestType | undefined
     ): requestSchemaConfig is SchemaRequestType {
         return (
@@ -85,7 +84,7 @@ export class RequestBuilder {
         ) ? true : false;
     }
 
-    private validateDataFromRequest(data: object, requestSchema: RequestSchema): void | never {
+    private validateDataFromRequest (data: object, requestSchema: RequestSchema): void | never {
         try {
             new ValidateDataFromExpressRequest(data, requestSchema.getSchemaToValidateParameters());
         } catch (e) {
@@ -93,11 +92,12 @@ export class RequestBuilder {
         }
     }
 
-    private handleErrorFromValidationOfRequest(e: Error) {
+    private handleErrorFromValidationOfRequest (e: Error) {
         if (e instanceof ValidationRequestException) {
             throw new BadRequestHttpException(e.message, e.getErrors());
         } else {
             throw new BadRequestHttpException(e.message);
         }
     }
+
 }

@@ -1,64 +1,63 @@
-import {REQUEST_PARSE_FROM} from "../../ControllerConsts";
-import {SchemaPropertyType} from "./SchemaPropertyType";
+import {REQUEST_PARSE_FROM} from '../../ControllerConsts';
+import {SchemaPropertyType} from './SchemaPropertyType';
 
 export const getParameterDescription = {
 
-    getBodyString(
+    getBodyString (
         name: string,
-        required: boolean = false,
+        required = false,
         description?: string
     ): SchemaPropertyType {
         return this.getString(REQUEST_PARSE_FROM.BODY, name, required, description);
     },
 
-    getPathString(
+    getPathString (
         name: string,
-        required: boolean = false,
+        required = false,
         description?: string
     ): SchemaPropertyType {
         return this.getString(REQUEST_PARSE_FROM.PATH, name, required, description);
     },
 
-    getString(
+    getString (
         findIn: string,
         name: string,
-        required: boolean = false,
+        required = false,
         description?: string
     ): SchemaPropertyType {
         return {
             findIn: findIn,
             name: name,
             schema: {
-                type: 'string'
+                type: 'string',
             },
             required: required,
-            description: description
-        }
+            description: description,
+        };
     },
 
-
-    getBodyBoolean(
+    getBodyBoolean (
         name: string,
-        required: boolean = false,
+        required = false,
         description?: string
     ): SchemaPropertyType {
         return this.getBoolean(REQUEST_PARSE_FROM.BODY, name, required, description);
     },
 
-    getBoolean(
+    getBoolean (
         findIn: string,
         name: string,
-        required: boolean = false,
+        required = false,
         description?: string
     ): SchemaPropertyType {
         return {
             findIn: findIn,
             name: name,
             schema: {
-                type: 'boolean'
+                type: 'boolean',
             },
             required: required,
-            description: description
-        }
+            description: description,
+        };
     },
-}
+};

@@ -1,11 +1,10 @@
-import {ExpressRequestType} from "../ExpressRequestType";
-import {DataExtractedFromExpressRequestType} from "../ExtractData/DataExtractedFromExpressRequestType";
-import {SchemeToValidateRequestType} from "../SchemeToValidateRequestType";
-
+import {ExpressRequestType} from '../ExpressRequestType';
+import {DataExtractedFromExpressRequestType} from '../ExtractData/DataExtractedFromExpressRequestType';
+import {SchemeToValidateRequestType} from '../SchemeToValidateRequestType';
 
 export class SchemaPropertyModel {
 
-    public constructor(
+    public constructor (
         private name: string,
         private findIn: string,
         private position: number,
@@ -15,32 +14,31 @@ export class SchemaPropertyModel {
     ) {
     }
 
-
-    getFindIn(): string {
+    getFindIn (): string {
         return this.findIn;
     }
 
-    getName(): string {
+    getName (): string {
         return this.name;
     }
 
-    getPosition(): number {
+    getPosition (): number {
         return this.position;
     }
 
-    getSchema(): object {
+    getSchema (): object {
         return this.schema;
     }
 
-    getRequired(): boolean {
+    getRequired (): boolean {
         return this.required;
     }
 
-    getDescription(): string|undefined {
+    getDescription (): string|undefined {
         return this.description;
     }
 
-    extractDataFromExpressRequest(
+    extractDataFromExpressRequest (
         expressRequest: ExpressRequestType,
         data: DataExtractedFromExpressRequestType
     ): DataExtractedFromExpressRequestType {
@@ -61,7 +59,7 @@ export class SchemaPropertyModel {
     //
     // }
 
-    getSchemaToValidateParameter(data: SchemeToValidateRequestType) {
+    getSchemaToValidateParameter (data: SchemeToValidateRequestType) {
         data.properties[this.name] = this.schema;
 
         if (this.required) {
@@ -69,4 +67,5 @@ export class SchemaPropertyModel {
         }
         return data;
     }
+
 }

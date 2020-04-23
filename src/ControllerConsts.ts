@@ -7,7 +7,7 @@ export const HTTP_METHOD_VERBS = {
     POST: 'POST',
     PUT: 'PUT',
     DELETE: 'DELETE',
-    PATCH: 'PATCH'
+    PATCH: 'PATCH',
 };
 
 export const REQUEST_PARSE_FROM = {
@@ -15,12 +15,12 @@ export const REQUEST_PARSE_FROM = {
     FORM: 'FORM',
     QUERY: 'QUERY',
     HEADER: 'HEADER',
-    PATH: 'PATH'
+    PATH: 'PATH',
 };
 
 export const HEADER_NAMES = {
-    CONTENT_TYPE: "Content-Type"
-}
+    CONTENT_TYPE: 'Content-Type',
+};
 
 export const HTTP_CODES = {
     OK: 200,
@@ -83,5 +83,5 @@ export const HTTP_CODES = {
     INSUFFICIENT_STORAGE: 507,
     LOOP_DETECTED_WEB_DAV: 508,
     NOT_EXTENDED: 510,
-    NETWORK_AUTHENTICATION_REQUIRED: 511
+    NETWORK_AUTHENTICATION_REQUIRED: 511,
 };

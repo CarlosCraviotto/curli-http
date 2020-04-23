@@ -1,6 +1,6 @@
-export class HttpException extends Error{
+export class HttpException extends Error {
 
-    public constructor(private httpCode: number, message: string, protected errors: Array<object> = []) {
+    public constructor (private httpCode: number, message: string, protected errors: Array<object> = []) {
         super(message);
     }
 

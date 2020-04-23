@@ -1,3 +1,3 @@
 export type ExpressRequestType = {
-    [key: string]: any
+    [key: string]: any;
 }

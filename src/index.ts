@@ -1,7 +1,7 @@
 export {
     SchemaRequestType,
     Request,
-    getParameterDescription
+    getParameterDescription,
 } from './Request';
 
 export * from './Exception';

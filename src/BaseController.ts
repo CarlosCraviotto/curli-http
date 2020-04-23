@@ -1,9 +1,8 @@
-import {NOT_IMPLEMENTED, DEFAULT_API_VERSION, DEFAULT_ROUTE_DESCRIPTION} from "./ControllerConsts";
-import {Response} from "./Response/Response";
-import {Request} from "./Request/Request";
-import {SchemaRequestType} from "./Request/Schema/SchemaRequestType";
-import {DTOType} from "./Type/DTOType";
-
+import {NOT_IMPLEMENTED, DEFAULT_API_VERSION, DEFAULT_ROUTE_DESCRIPTION} from './ControllerConsts';
+import {Response} from './Response/Response';
+import {Request} from './Request/Request';
+import {SchemaRequestType} from './Request/Schema/SchemaRequestType';
+import {DTOType} from './Type/DTOType';
 
 export class BaseController {
 
@@ -29,63 +28,64 @@ export class BaseController {
 
     public readonly ROUTE_DESCRIPTION: string = DEFAULT_ROUTE_DESCRIPTION;
 
-    public constructor(protected container: {get: any}) {
+    public constructor (protected container: {get: any}) {
     }
 
-    public async processRequest(request: Request): Promise<Response> {
+    public async processRequest (request: Request): Promise<Response> {
         throw new Error('Method processRequest must be implemented in ' + this.ROUTE_NAME + ' controller.');
         console.log(request);
     }
 
-    public getRouteName(): string {
+    public getRouteName (): string {
         return this.ROUTE_NAME;
     }
 
-    public getRoute(): string {
+    public getRoute (): string {
         return this.ROUTE;
     }
 
-    public getHttpMethod(): string {
+    public getHttpMethod (): string {
         return this.HTTP_METHOD;
     }
 
-    public getHttpMethodLowerCase(): string {
+    public getHttpMethodLowerCase (): string {
         return this.HTTP_METHOD.toLowerCase();
     }
 
-    public getApiVersion(): string {
+    public getApiVersion (): string {
         return this.API_VERSION;
     }
 
-    public getRouteDescription(): string {
+    public getRouteDescription (): string {
         return this.ROUTE_DESCRIPTION;
     }
 
     /**
      * We use it to validate, get the data and declare it in the open api page/
      */
-    public getRequestSchema(): SchemaRequestType|undefined {
+    public getRequestSchema (): SchemaRequestType|undefined {
         return void(0);
     }
 
     /**
      * Should return the schema for the response, with it we wil build the open api page.
      */
-    public getResponseSchema(): object|undefined {
+    public getResponseSchema (): object|undefined {
         return void(0);
     }
 
     /**
      * Return an object than the router handle will fill up with the data from the request, all the properties must be public
      */
-    public getCommand(): DTOType|undefined {
+    public getCommand (): DTOType|undefined {
         return void(0);
     }
 
     /**
      * Return the roles we will accept for this route base in the user roles
      */
-    public getRoles(): Array<string>|undefined {
+    public getRoles (): Array<string>|undefined {
         return void(0);
     }
+
 }

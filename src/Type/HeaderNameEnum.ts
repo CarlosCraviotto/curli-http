@@ -1,3 +1,3 @@
 export enum HeaderNameEnum{
-    ContentType = "Content-Type"
+    ContentType = 'Content-Type'
 }
