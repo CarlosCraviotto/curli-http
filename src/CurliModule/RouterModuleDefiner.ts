@@ -4,7 +4,7 @@ import {CurliApplication} from 'curli-types';
 
 import {Module, ModulesDefiner, ApplicationEvents} from 'curli-types';
 
-export class RouterModuleDefiner implements ModulesDefiner{
+export class RouterModuleDefiner implements ModulesDefiner {
 
     private routerService?: RouterService;
 

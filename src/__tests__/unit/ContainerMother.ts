@@ -1,6 +1,6 @@
 import {DependencyInjection} from 'curli-types';
 
-class Container implements DependencyInjection{
+class Container implements DependencyInjection {
 
     public get (name: string): any {
         return name;
@@ -16,22 +16,22 @@ class Container implements DependencyInjection{
         return ['service'];
     }
 
-    editRegisteredServiceDescriptions<T>(_serviceName: string, _callback: T): void {
+    editRegisteredServiceDescriptions<T> (_serviceName: string, _callback: T): void {
     }
 
-    registerExternalServicesRegister(_externalServicesRegister: any): void {
+    registerExternalServicesRegister (_externalServicesRegister: any): void {
     }
 
-    registerService<T extends {}>(
+    registerService<T extends {}> (
         _serviceName: string,
-                                  _dependencies: Array<string>,
-                                  _serviceFunc: T,
-                                  _autoInit?: boolean,
+        _dependencies: Array<string>,
+        _serviceFunc: T,
+        _autoInit?: boolean,
         _injectDependencies?: object
     ): void {
     }
 
-    removeRegisteredServiceDescriptions(_serviceName: string): void {
+    removeRegisteredServiceDescriptions (_serviceName: string): void {
     }
 
 }

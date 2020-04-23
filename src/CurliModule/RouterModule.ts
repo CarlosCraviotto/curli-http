@@ -5,10 +5,10 @@ import {Module} from 'curli-types';
 
 export class RouterModule implements Module {
 
-    public constructor() {
+    public constructor () {
     }
 
-    public registerServices(container: DependencyInjection) {
+    public registerServices (container: DependencyInjection) {
         container.registerService(
             'router',
             ['@expressApp', 'container'],
@@ -17,8 +17,8 @@ export class RouterModule implements Module {
         );
     }
 
-    public getName(): string {
+    public getName (): string {
         return 'RouterModule';
-    };
+    }
 
 }
