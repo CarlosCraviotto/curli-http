@@ -27,15 +27,15 @@ describe('Collections classes tests', function () {
         routerService.addControllerClass(Controller);
     });
 
-    // it('Should add two services with same name in Collection servicesCollection', function () {
-    //     const servicesCollection = getClassServicesCollection();
-    //     const serviceName = 'foo';
-    //
-    //     servicesCollection.add(new ServiceNameDescriptionVO(serviceName), 'foo');
-    //
-    //     chai.assert.throws(function () {
-    //         servicesCollection.add(new ServiceNameDescriptionVO(serviceName), 'foo');
-    //     }, 'The service with name ' + serviceName + ' already exist.');
-    // });
+    it('Should throw exception when try to add a controller with not route declared.', function () {
+        const expressApp = expressAppMother.get();
+
+        const routerService = new RouterService(expressApp, containerMother.get());
+        const ControllerNotInitialized = controllerMother.getControllerNotInitialized();
+
+        chai.assert.throws(function () {
+            routerService.addControllerClass(ControllerNotInitialized);
+        }, 'This controller doesn\'t implement all the properties.');
+    });
 
 });

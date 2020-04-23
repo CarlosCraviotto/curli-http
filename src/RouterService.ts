@@ -22,10 +22,6 @@ export class RouterService {
      *
      * @param ControllerClass
      */
-    // public addControllerClass(ControllerClass: any): void {
-    //     this._addController(ControllerClass);
-    // }
-
     public addControllerClass (ControllerClass: new (c: DependencyInjection) => any) {
         const controller = new ControllerClass(this.container);
         this.validateControllerObject(controller);

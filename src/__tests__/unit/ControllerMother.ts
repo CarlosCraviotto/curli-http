@@ -1,6 +1,10 @@
 import {DependencyInjection} from 'curli-types';
 import {BaseController} from '../../BaseController';
 
+interface ClassConstructorContainer  {
+ new(c: DependencyInjection): any;
+}
+
 class ControllerTest extends BaseController {
 
     HTTP_METHOD = 'get';
@@ -17,8 +21,30 @@ class ControllerTest extends BaseController {
 
 }
 
+
+class ControllerNotInitialized extends BaseController {
+
+    ROUTE = '/user';
+    ROUTE_NAME = 'getUser';
+
+    constructor (container: DependencyInjection) {
+        super(container);
+    }
+
+    processRequest (): Promise<any> {
+        return Promise.resolve('');
+    }
+
+}
+
 export const controllerMother = {
-    getUserController (): { new(c: DependencyInjection): any } {
+
+    getUserController (): ClassConstructorContainer  {
         return ControllerTest;
     },
+
+    getControllerNotInitialized (): ClassConstructorContainer  {
+        return ControllerNotInitialized;
+    },
+
 };
