@@ -1,12 +1,14 @@
 import {RouterService} from '../RouterService';
 import {DependencyInjection} from 'curli-types';
 
-export class RouterModule {
+import {Module} from 'curli-types';
 
-    public constructor () {
+export class RouterModule implements Module {
+
+    public constructor() {
     }
 
-    public registerServices (container: DependencyInjection) {
+    public registerServices(container: DependencyInjection) {
         container.registerService(
             'router',
             ['@expressApp', 'container'],
@@ -14,5 +16,9 @@ export class RouterModule {
             true
         );
     }
+
+    public getName(): string {
+        return 'RouterModule';
+    };
 
 }

@@ -2,7 +2,9 @@ import {ROUTER_SERVICE_NAME} from './ModuleConst';
 import {RouterService} from '../RouterService';
 import {CurliApplication} from 'curli-types';
 
-export class RouterModuleDefiner {
+import {Module, ModulesDefiner, ApplicationEvents} from 'curli-types';
+
+export class RouterModuleDefiner implements ModulesDefiner{
 
     private routerService?: RouterService;
 
@@ -20,7 +22,7 @@ export class RouterModuleDefiner {
     /**
      * This should return the name of the application event when we want to call the modules.
      */
-    whenCallMethodInModules (): string {
+    whenCallMethodInModules (): ApplicationEvents {
         return 'before:start';
     }
 
@@ -32,7 +34,7 @@ export class RouterModuleDefiner {
      * The accept method in the visitor Pattern, here we know what to call
      * @param _module
      */
-    callMethodInModules (module: {registerRouters: (r: RouterService) => any}): void {
+    callMethodInModules (module: Module): void {
         module.registerRouters((this.routerService as RouterService));
     }
 
