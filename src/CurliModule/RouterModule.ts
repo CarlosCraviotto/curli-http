@@ -9,7 +9,7 @@ export class RouterModule implements Module {
     public constructor () {
     }
 
-    public registerBooters(booterRegisterer: BooterRegister) {
+    public registerBooters (booterRegisterer: BooterRegister) {
         booterRegisterer.registerBooter(RequestParsersBooter);
     }
 

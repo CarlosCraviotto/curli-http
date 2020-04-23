@@ -97,7 +97,7 @@ export class RouterService {
             controller.getRouteName() === NOT_IMPLEMENTED ||
             controller.getHttpMethod() === NOT_IMPLEMENTED
         ) {
-            //console.log(controller);
+            // console.log(controller);
             throw new Error('This controller doesn\'t implement all the properties.');
         }
     }

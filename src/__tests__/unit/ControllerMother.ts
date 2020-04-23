@@ -1,7 +1,7 @@
 import {DependencyInjection} from 'curli-types';
 import {BaseController} from '../../BaseController';
 
-interface ClassConstructorContainer  {
+interface ClassConstructorContainer {
  new(c: DependencyInjection): any;
 }
 
@@ -21,7 +21,6 @@ class ControllerTest extends BaseController {
 
 }
 
-
 class ControllerNotInitialized extends BaseController {
 
     ROUTE = '/user';
@@ -39,11 +38,11 @@ class ControllerNotInitialized extends BaseController {
 
 export const controllerMother = {
 
-    getUserController (): ClassConstructorContainer  {
+    getUserController (): ClassConstructorContainer {
         return ControllerTest;
     },
 
-    getControllerNotInitialized (): ClassConstructorContainer  {
+    getControllerNotInitialized (): ClassConstructorContainer {
         return ControllerNotInitialized;
     },
 
