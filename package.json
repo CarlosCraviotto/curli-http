@@ -56,7 +56,7 @@
   },
   "homepage": "https://github.com/CarlosCraviotto/curli-http#readme",
   "dependencies": {
-    "curli-types": "^0.0.1-beta.3"
+    "curli-types": "^0.0.1-beta.5"
   },
   "devDependencies": {
     "@types/mocha": "7.0.2",
