@@ -1,6 +1,7 @@
 import {Booter, CurliApplication} from 'curli-types';
 
 import * as bodyParser from 'body-parser';
+import * as cors from 'cors';
 
 export class RequestParsersBooter implements Booter {
 
@@ -10,6 +11,7 @@ export class RequestParsersBooter implements Booter {
     public boot (): void {
         this.app.setMiddleware(bodyParser.urlencoded({extended: true}));
         this.app.setMiddleware(bodyParser.json());
+        this.app.setMiddleware(cors());
     }
 
 }

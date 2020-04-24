@@ -44,7 +44,7 @@ routerService.addControllerClass(UserController);
 
 
 
-
+Added cors support - 24/04/20 - 0.0.1-beta.3
 
 ### Contributing
 
