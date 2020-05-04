@@ -5,15 +5,19 @@ import {RequestBuilder} from './Request/RequestBuilder';
 //import {HttpException} from './Exception/HttpException';
 
 import {DependencyInjection} from 'curli-types';
+import {ProblemJsonResponse} from "./Response/ProblemJsonResponse";
+import {ExceptionsMapper} from "./Exception/MapExceptions/ExceptionsMapper";
 
 export class RouterService {
 
     private controllersCollection: Array<BaseController>;
     private requestBuilder: RequestBuilder;
+    private exceptionsMapper: ExceptionsMapper;
 
     public constructor (private expressApp: {[key: string]: any}, private container: DependencyInjection) {
         this.controllersCollection = [];
         this.requestBuilder = new RequestBuilder();
+        this.exceptionsMapper = new ExceptionsMapper();
     }
 
     /**
@@ -27,6 +31,10 @@ export class RouterService {
         this.validateControllerObject(controller);
         this.controllersCollection.push(controller);
         this.bindController(controller);
+    }
+
+    public getExceptionsMapper (): ExceptionsMapper {
+        return this.exceptionsMapper;
     }
 
     private bindController (controller: BaseController) {
@@ -72,19 +80,12 @@ export class RouterService {
     }
 
     private sendError (e: Error, res: any): void {
-        if (e instanceof HttpException) {
-            res.status(e.getHttpCode())
-                .set()
-                .send(e.toJson());
-        } else {
-            this.sendInternalError(e, res);
-        }
+        const problemJsonResponse: ProblemJsonResponse = this.exceptionsMapper.mapException(e);
+        res.status(problemJsonResponse.getCode())
+            .set(problemJsonResponse.getHeaders())
+            .send(problemJsonResponse.getContent());
     }
 
-    private sendInternalError (e: Error, res: any): void {
-        console.log(e);
-        res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).set({}).send(e);
-    }
 
     private validateControllerObject (controller: any): void | never {
 

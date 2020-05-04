@@ -9,6 +9,7 @@ export enum ContentTypeEnum {
     X_SHOCKWAVE_FLASH = 'application/x-shockwave-flash',
     JSON = 'application/json',
     LD_JSON = 'application/ld+json',
+    PROBLEM_JSON = 'application/problem+json',
     APPLICATION_XML = 'application/xml',
     ZIP = 'application/zip',
     X_WWW_FORM_URLENCODED = 'application/x-www-form-urlencoded',
