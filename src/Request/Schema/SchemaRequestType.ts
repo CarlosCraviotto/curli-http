@@ -5,6 +5,6 @@ import {SchemaPropertyType} from './SchemaPropertyType';
  */
 export type SchemaRequestType = {
     parameters: Array<SchemaPropertyType>;
-        requestBody: object;
+    requestBody: object;
 }
 

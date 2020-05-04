@@ -1,5 +1,5 @@
 import {ExpressRequestType} from './ExpressRequestType';
-import {HEADER_NAMES} from '../ControllerConsts';
+import {HeaderNames} from '../ControllerConsts';
 import {DTOType} from '../Type/DTOType';
 
 export class Request {
@@ -19,11 +19,11 @@ export class Request {
 
     public getSameContentTypeThanRequestHeader (): object {
         const headers: DTOType = this.expressRequest.headers;
-        const contentType: string | undefined = headers[HEADER_NAMES.CONTENT_TYPE];
+        const contentType: string | undefined = headers[HeaderNames.CONTENT_TYPE];
         const headersNew: DTOType = {};
 
         if (contentType) {
-            headersNew[HEADER_NAMES.CONTENT_TYPE] = contentType;
+            headersNew[HeaderNames.CONTENT_TYPE] = contentType;
         }
         return headersNew;
     }

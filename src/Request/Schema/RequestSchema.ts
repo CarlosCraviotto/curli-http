@@ -10,27 +10,32 @@ export class RequestSchema {
 
     public constructor (private schema: SchemaRequestType) {
         this.parameters = new SchemaPropertiesCollection();
-        this.requestBody = schema.requestBody;
-        this.parameters.buildFromList(schema.parameters);
-    }
-
-    public getRawSchema (): object {
-        return this.schema;
-    }
-
-    public getParametersCollection (): SchemaPropertiesCollection {
-        return this.parameters;
+        this.requestBody = this.schema.requestBody;
+        this.parameters.buildFromList(this.schema.parameters);
     }
 
     public getRequestBody (): object {
         return this.requestBody;
     }
 
-    extractDataFromExpressRequest (expressRequest: ExpressRequestType): DataExtractedFromExpressRequestType {
+    /**
+     * Extract the data from an express request as is
+     * declared in the request schema
+     *
+     * @param {ExpressRequestType} expressRequest
+     * @returns {object} A DTO object base in the properties are found.
+     */
+    public extractDataFromExpressRequest (
+        expressRequest: ExpressRequestType
+    ): DataExtractedFromExpressRequestType {
         return this.parameters.extractDataFromExpressRequest(expressRequest);
     }
 
-    getSchemaToValidateParameters () {
+    /**
+     *
+     * @returns {SchemeToValidateRequestType}
+     */
+    public getSchemaToValidateParameters () {
         return this.parameters.getSchemaToValidateParameters();
     }
 

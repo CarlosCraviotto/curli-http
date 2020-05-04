@@ -1,4 +1,4 @@
-import {REQUEST_PARSE_FROM} from '../../ControllerConsts';
+import {REQUEST_PARSE_FROM, RequestParseFrom} from '../../ControllerConsts';
 import {SchemaPropertyType} from './SchemaPropertyType';
 
 export const getParameterDescription = {
@@ -20,7 +20,7 @@ export const getParameterDescription = {
     },
 
     getString (
-        findIn: string,
+        findIn: RequestParseFrom,
         name: string,
         required = false,
         description?: string
@@ -45,7 +45,7 @@ export const getParameterDescription = {
     },
 
     getBoolean (
-        findIn: string,
+        findIn: RequestParseFrom,
         name: string,
         required = false,
         description?: string

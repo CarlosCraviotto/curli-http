@@ -14,24 +14,8 @@ export class SchemaPropertyModel {
     ) {
     }
 
-    getFindIn (): string {
-        return this.findIn;
-    }
-
-    getName (): string {
-        return this.name;
-    }
-
     getPosition (): number {
         return this.position;
-    }
-
-    getSchema (): object {
-        return this.schema;
-    }
-
-    getRequired (): boolean {
-        return this.required;
     }
 
     getDescription (): string|undefined {
@@ -54,10 +38,6 @@ export class SchemaPropertyModel {
 
         return data;
     }
-
-    // public getValidateSchemaForProperty(): object{
-    //
-    // }
 
     getSchemaToValidateParameter (data: SchemeToValidateRequestType) {
         data.properties[this.name] = this.schema;

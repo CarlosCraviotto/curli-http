@@ -1,8 +1,8 @@
 import {BaseController} from './BaseController';
 import {Request} from './Request/Request';
-import {HTTP_CODES, NOT_IMPLEMENTED} from './ControllerConsts';
+import {HttpCodes, NOT_IMPLEMENTED} from './ControllerConsts';
 import {RequestBuilder} from './Request/RequestBuilder';
-import {HttpException} from './Exception/HttpException';
+//import {HttpException} from './Exception/HttpException';
 
 import {DependencyInjection} from 'curli-types';
 
@@ -63,7 +63,7 @@ export class RouterService {
                 if (req.user) {
                     next();
                 } else {
-                    res.status(HTTP_CODES.UNAUTHORIZED).set({}).send('Unauthorized to view this!');
+                    res.status(HttpCodes.UNAUTHORIZED).set({}).send('Unauthorized to view this!');
                 }
             } catch (e) {
                 this.sendError(e, res);

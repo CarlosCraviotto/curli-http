@@ -13,25 +13,24 @@ export class SchemaPropertiesCollection {
     }
 
     public buildFromList (list: Array<SchemaPropertyType>): void {
+
         list.forEach((propertyData: SchemaPropertyType, index: number) => {
 
-            const name: string = propertyData.name;
-            const findIn: string = propertyData.findIn;
-            // private position: number,
-            const schema: object | undefined = (propertyData.hasOwnProperty('schema')) ?
-                propertyData.schema : void (0);
-
-            const required: boolean | undefined = (propertyData.hasOwnProperty('required')) ?
-                propertyData.required : void (0);
-
-            const description: string | undefined = (propertyData.hasOwnProperty('schema')) ?
-                propertyData.schema : void (0);
-
-            this.collection.push(new SchemaPropertyModel(name, findIn, index, schema, required, description));
+            this.collection.push(new SchemaPropertyModel(
+                propertyData.name,
+                propertyData.findIn,
+                index,
+                (propertyData.hasOwnProperty('schema')) ? propertyData.schema : void (0),
+                (propertyData.hasOwnProperty('required')) ? propertyData.required : void (0),
+                (propertyData.hasOwnProperty('schema')) ? propertyData.schema : void (0)
+            ));
         });
     }
 
-    extractDataFromExpressRequest (expressRequest: ExpressRequestType): DataExtractedFromExpressRequestType {
+    public extractDataFromExpressRequest (
+        expressRequest: ExpressRequestType
+    ): DataExtractedFromExpressRequestType {
+
         let data: DataExtractedFromExpressRequestType = {};
 
         this.collection.forEach((schemaPropertyModel: SchemaPropertyModel) => {
@@ -41,7 +40,7 @@ export class SchemaPropertiesCollection {
         return data;
     }
 
-    getSchemaToValidateParameters () {
+    public getSchemaToValidateParameters () {
         let data: SchemeToValidateRequestType = {};
 
         if (this.collection.length > 0) {

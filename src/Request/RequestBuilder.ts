@@ -14,12 +14,17 @@ export class RequestBuilder {
 
     public build (req: any, res: any, controller: BaseController): Request {
         const headers: object = this.getHeadersFromRequest(req);
-        const commandDTO = this.processRequestAndGenerateCommandDTO(req, controller);
+        const commandDTO = this.processRequestAndGenerateDTO(req, controller);
         const request = new Request(req, res, headers, commandDTO, req.user);
 
         return request;
     }
 
+    /**
+     * Get Headers From Request
+     * @param req
+     * @returns {object} The headers from the request
+     */
     private getHeadersFromRequest (req: any): object {
         let headers: object = {};
         if (req.hasOwnProperty('headers')) {
@@ -28,7 +33,13 @@ export class RequestBuilder {
         return headers;
     }
 
-    private processRequestAndGenerateCommandDTO (
+    /**
+     * Create request DTO and validate it
+     * @param {ExpressRequestType} req
+     * @param {BaseController} controller
+     * @returns {object | undefined}
+     */
+    private processRequestAndGenerateDTO (
         req: ExpressRequestType,
         controller: BaseController
     ): object | undefined {
@@ -59,7 +70,9 @@ export class RequestBuilder {
         dataFromRequest: DTOType,
         controller: BaseController
     ): DTOType {
+
         const objectCommand: DTOType | undefined = controller.getCommand();
+
         if (objectCommand) {
             for (const key in dataFromRequest) {
                 objectCommand[key] = dataFromRequest[key];
@@ -84,6 +97,11 @@ export class RequestBuilder {
         ) ? true : false;
     }
 
+    /**
+     *
+     * @param {object} data
+     * @param {RequestSchema} requestSchema
+     */
     private validateDataFromRequest (data: object, requestSchema: RequestSchema): void | never {
         try {
             new ValidateDataFromExpressRequest(data, requestSchema.getSchemaToValidateParameters());
@@ -92,6 +110,10 @@ export class RequestBuilder {
         }
     }
 
+    /**
+     *
+     * @param {Error} e
+     */
     private handleErrorFromValidationOfRequest (e: Error) {
         if (e instanceof ValidationRequestException) {
             throw new BadRequestHttpException(e.message, e.getErrors());
