@@ -11,7 +11,8 @@ let requestSchemaConfig: SchemaRequestType = {
     parameters: [
         {name: 'name', findIn: 'body', required: true},
         {name: 'email', findIn: 'body'},
-        {name: 'userId', findIn: 'path', required: true}
+        {name: 'userId', findIn: 'path', required: true},
+        {name: 'year', findIn: 'query', required: false}
         ],
     requestBody: {}
 };
@@ -19,16 +20,19 @@ let requestSchemaConfig: SchemaRequestType = {
 describe('RequestSchema class tests', function () {
 
     it('Should extract data from request', function () {
+
         const requestSchema = new RequestSchema(requestSchemaConfig);
         const req = {
             body: {name: 'luis', email: 'luis@hojer.com'},
-            path: {userId: 'asdr23afsfe-qwfs-4f43-sd4444'}
+            params: {userId: 'asdr23afsfe-qwfs-4f43-sd4444'},
+            query: {year: '2020'}
         };
 
         const data = requestSchema.extractDataFromExpressRequest(req);
 
         chai.assert.deepEqual('luis', data.name);
         chai.assert.deepEqual('luis@hojer.com', data.email);
+        chai.assert.deepEqual('2020', data.year);
         chai.assert.deepEqual('asdr23afsfe-qwfs-4f43-sd4444', data.userId);
 
     });
@@ -40,7 +44,8 @@ describe('RequestSchema class tests', function () {
             "properties": {
                 "email": {},
                 "name": {},
-                "userId": {}
+                "userId": {},
+                "year": {}
             },
             "required": [
                 "name",

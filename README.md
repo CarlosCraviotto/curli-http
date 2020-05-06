@@ -34,7 +34,7 @@ routerService.addControllerClass(UserController);
 
 ### Commands
 
- - `npm run build`: Build the project (dependency injection).
+ - `npm run build`: Build the project (Http router).
  - `npm run build:clean`: Delete first the dist folder and build it.
  - `npm run clean`: Delete the dist folder.
  - `npm run test`: Execute the tests.

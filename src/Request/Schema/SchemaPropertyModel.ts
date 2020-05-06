@@ -1,12 +1,13 @@
 import {ExpressRequestType} from '../ExpressRequestType';
 import {DataExtractedFromExpressRequestType} from '../ExtractData/DataExtractedFromExpressRequestType';
 import {SchemeToValidateRequestType} from '../SchemeToValidateRequestType';
+import {RequestParseFrom} from "../../ControllerConsts";
 
 export class SchemaPropertyModel {
 
-    public constructor (
+    public constructor(
         private name: string,
-        private findIn: string,
+        private findIn: RequestParseFrom,
         private position: number,
         private schema: object = {},
         private required: boolean = false,
@@ -14,19 +15,19 @@ export class SchemaPropertyModel {
     ) {
     }
 
-    getPosition (): number {
+    getPosition(): number {
         return this.position;
     }
 
-    getDescription (): string|undefined {
+    getDescription(): string | undefined {
         return this.description;
     }
 
-    extractDataFromExpressRequest (
+    extractDataFromExpressRequest(
         expressRequest: ExpressRequestType,
         data: DataExtractedFromExpressRequestType
     ): DataExtractedFromExpressRequestType {
-        const findIn = this.findIn.toLowerCase();
+        const findIn = this.adaptFindInToExpressObject();
 
         if (
             expressRequest.hasOwnProperty(findIn) &&
@@ -39,13 +40,22 @@ export class SchemaPropertyModel {
         return data;
     }
 
-    getSchemaToValidateParameter (data: SchemeToValidateRequestType) {
+    getSchemaToValidateParameter(data: SchemeToValidateRequestType) {
         data.properties[this.name] = this.schema;
 
         if (this.required) {
             data.required.push(this.name);
         }
         return data;
+    }
+
+    private adaptFindInToExpressObject(): string {
+        let findIn: string = this.findIn.toLowerCase();
+
+        if (findIn === 'path') {
+            findIn = 'params';
+        }
+        return findIn;
     }
 
 }

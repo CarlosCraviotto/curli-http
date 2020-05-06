@@ -1,6 +1,6 @@
 {
   "name": "curli-http",
-  "version": "0.0.1-beta.5",
+  "version": "0.0.1-beta.7",
   "description": "A Http layer on Express without decorators",
   "main": "index",
   "scripts": {
