@@ -46,6 +46,7 @@ export class ExceptionsMapper {
     }
 
     private buildDefaultExceptionMapper(error: Error): ExceptionMapper {
-        return new ExceptionMapper(error.constructor.name, DEFAULT_EXCEPTION_CODE);
+        const code = (typeof error.getHttpCode === 'function')? error.getHttpCode() : DEFAULT_EXCEPTION_CODE;
+        return new ExceptionMapper(error.constructor.name, code);
     }
 }

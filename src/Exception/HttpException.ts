@@ -11,5 +11,4 @@ export class HttpException extends Error {
     public toJson (): object {
         return {error: this.message, errors: this.errors};
     }
-
 }

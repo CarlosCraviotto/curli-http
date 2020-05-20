@@ -2,6 +2,7 @@ import chai = require('chai');
 //import { ImportMock } from 'ts-mock-imports';
 
 import {ExceptionsMapper} from '../../Exception/MapExceptions/ExceptionsMapper';
+import {BadRequestHttpException} from "../../Exception";
 
 let exceptionsMapper: ExceptionsMapper;
 
@@ -63,6 +64,16 @@ describe('ExceptionsMapper class tests', function () {
         chai.assert.deepEqual(500, problemJsonResponse.getCode());
         chai.assert.deepEqual(
             '{"type":"about:blank","status":500,"title":"Internal server error"}',
+            problemJsonResponse.getContent()
+        );
+    });
+
+    it('Should map an exception to 400', function () {
+        const problemJsonResponse = exceptionsMapper.mapException(new BadRequestHttpException('Internal server error'));
+
+        chai.assert.deepEqual(400, problemJsonResponse.getCode());
+        chai.assert.deepEqual(
+            '{"type":"about:blank","status":400,"title":"Internal server error","invalid-params":[]}',
             problemJsonResponse.getContent()
         );
     });

@@ -7,4 +7,7 @@ export class BadRequestHttpException extends HttpException {
         super(HttpCodes.BAD_REQUEST, message, errors);
     }
 
+    public getInvalidParams (): Array<object> {
+        return this.errors;
+    }
 }
