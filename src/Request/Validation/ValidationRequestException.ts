@@ -8,4 +8,8 @@ export class ValidationRequestException extends Error {
         return this.errors;
     }
 
+    public getInvalidParams (): Array<object> {
+        return this.errors;
+    }
+
 }
